@@ -1,9 +1,9 @@
-package enhancedLibrary.service.Books;
+package enhancedLibrary.service.IssuesService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class BooksService {
+public class IssuesService {
 }
