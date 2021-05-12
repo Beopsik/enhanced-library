@@ -21,12 +21,16 @@ public class BooksService {
                 .map(BooksResponseDto::new)
                 .collect(Collectors.toList());
     }
-
-    @Transactional
-    public BooksResponseDto findById(Long id){
-        Books entity=booksRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("No book"));
-
-        return new BooksResponseDto(entity);
+    @Transactional(readOnly = true)
+    public List<BooksResponseDto> findAllByTitle(String title){
+        return booksRepository.findAllByTitle(title).stream()
+                .map(BooksResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<BooksResponseDto> findAllByAuthor(String author){
+        return booksRepository.findAllByAuthor(author).stream()
+                .map(BooksResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

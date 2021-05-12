@@ -8,4 +8,8 @@ import java.util.List;
 public interface BooksRepository extends JpaRepository<Books, Long> {
     @Query("SELECT '*' FROM Books")
     List<Books> findAll();
+
+    List<Books> findAllByTitle(String title);
+
+    List<Books> findAllByAuthor(String author);
 }
