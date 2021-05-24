@@ -1,7 +1,9 @@
 package enhancedLibrary.web.dto;
 
 import enhancedLibrary.domain.Books;
+import lombok.Getter;
 
+@Getter
 public class BooksResponseDto {
     private Long id;
     private String title;

@@ -27,7 +27,7 @@ public class Issues {
     private Integer issuePeriod;
 
     @Column(nullable = false)
-    private boolean overdueStatus;
+    private Boolean overdueStatus;
 
     @Column(nullable = false)
     private Integer calculatedFine;

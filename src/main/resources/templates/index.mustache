@@ -1,0 +1,30 @@
+{{>layout/header}}
+
+<h1>Enhanced Library Ver.2.1</h1>
+<div class="col-md-12">
+    <a href="/issue/save" role="button" class="btn btn-primary">책 대여</a>
+    <a href="/issue/show" role="button" class="btn btn-primary">대여 정보</a>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>책 일련번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>줄거리 소개</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#EbookList}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{description}}</td>
+            </tr>
+        {{/EbookList}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}
