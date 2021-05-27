@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface IssuesRepository extends JpaRepository<Issues, Integer> {
+public interface IssuesRepository extends JpaRepository<Issues, String> {
     List<Issues> findAllByGuestId(String guestId);
 }
