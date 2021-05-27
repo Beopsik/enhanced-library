@@ -1,5 +1,6 @@
 package enhancedLibrary.web.dto;
 
+import enhancedLibrary.domain.Books;
 import enhancedLibrary.domain.Issues;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,14 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class IssueSaveRequestDto{
     private String guestId;
-    private int bookId;
+    private Books bookId;
     private String startDate;
     private String dueDate;
     private boolean overdueState;
     private int calculatedFine;
 
     @Builder
-    public  IssueSaveRequestDto(String guestId, int bookId, String startDate, String dueDate,
+    public  IssueSaveRequestDto(String guestId, Books bookId, String startDate, String dueDate,
                                 boolean overdueState, int calculatedFine){
         this.guestId=guestId;
         this.bookId=bookId;

@@ -1,6 +1,7 @@
 package enhancedLibrary.domain;
 
 
+import enhancedLibrary.web.dto.BooksResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,9 @@ public class Issues {
     @Column(length = 45, nullable = false)
     private String guestId;
 
-    @Column(nullable = false)
-    private Integer bookId;
+    @OneToOne
+    @JoinColumn(name = "book_id")
+    private Books bookId;
 
     @Column(nullable = false)
     private String startDate;
@@ -35,8 +37,8 @@ public class Issues {
     private Integer calculatedFine;
 
     @Builder
-    public  Issues(String guestId, int bookId, String startDate, String dueDate,
-                                boolean overdueState, int calculatedFine){
+    public  Issues(String guestId, Books bookId, String startDate, String dueDate,
+                   boolean overdueState, int calculatedFine){
         this.guestId=guestId;
         this.bookId=bookId;
         this.startDate=startDate;

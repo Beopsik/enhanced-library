@@ -26,4 +26,18 @@ public class BooksResponseDto {
         this.location=entity.getLocation();
         this.ebookFile_path=entity.getEbookFile_path();
     }
+
+    public Books toEntity(){
+        return Books.builder()
+                .bookId(bookid)
+                .title(title)
+                .author(author)
+                .image_path(image_path)
+                .description(description)
+                .price(price)
+                .quantity(quantity)
+                .location(location)
+                .ebookFile_path(ebookFile_path)
+                .build();
+    }
 }

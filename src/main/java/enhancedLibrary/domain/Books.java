@@ -14,9 +14,6 @@ public class Books {
     @Id
     private Integer bookId;
 
-    @Column
-    private Integer issueIndex;
-
     @Column(length = 45, nullable = false)
     private String title;
 
@@ -45,11 +42,10 @@ public class Books {
     private String bookType;
 
     @Builder
-    public Books(Integer bookId, Integer issueIndex, String title, String author, String image_path,
+    public Books(Integer bookId, String title, String author, String image_path,
                  String description, Integer price, Integer quantity,
                  String location, String ebookFile_path, String bookType){
         this.bookId=bookId;
-        this.issueIndex=issueIndex;
         this.title=title;
         this.author=author;
         this.image_path=image_path;

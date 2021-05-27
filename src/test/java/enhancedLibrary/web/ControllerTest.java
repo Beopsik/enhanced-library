@@ -4,7 +4,10 @@ import enhancedLibrary.domain.Books;
 import enhancedLibrary.domain.BooksRepository;
 import enhancedLibrary.domain.Issues;
 import enhancedLibrary.domain.IssuesRepository;
+import enhancedLibrary.service.IssuesService.IssuesService;
+import enhancedLibrary.web.dto.BooksResponseDto;
 import enhancedLibrary.web.dto.IssueSaveRequestDto;
+import enhancedLibrary.web.dto.IssuesResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +36,21 @@ public class ControllerTest {
     private IssuesRepository issuesRepository;
 
     @Autowired
+    private IssuesService issuesService;
+
+    @Autowired
     private BooksRepository booksRepository;
 
     @Test
     public void save(){
         String guestId="1";
-        int bookId=1;
-        String startDate="2017/07/07";
-        String dueDate="2017/07/23";
+        Books bookId=new Books(1,"title", "author", "image_path", "description", 0, 1, "location", "ebookFile_path","paper");
+        String startDate="2017-07-07";
+        String dueDate="2017-07-23";
         Boolean overdueState=false;
         int calculatedFine=0;
 
+        booksRepository.save(bookId);
         IssueSaveRequestDto issueSaveRequestDto=IssueSaveRequestDto.builder()
                 .guestId(guestId)
                 .bookId(bookId)
@@ -61,7 +68,10 @@ public class ControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<Issues> all=issuesRepository.findAll();
         assertThat(all.get(0).getGuestId()).isEqualTo(guestId);
-        assertThat(all.get(0).getBookId()).isEqualTo(bookId);
+        assertThat(all.get(0).getBookId().getBookId()).isEqualTo(bookId.getBookId());
+        assertThat(all.get(0).getBookId().getTitle()).isEqualTo(bookId.getTitle());
+        assertThat(all.get(0).getBookId().getBookType()).isEqualTo(bookId.getBookType());
+        assertThat(all.get(0).getBookId().getAuthor()).isEqualTo(bookId.getAuthor());
         assertThat(all.get(0).getStartDate()).isEqualTo(startDate);
         assertThat(all.get(0).getDueDate()).isEqualTo(dueDate);
         assertThat(all.get(0).getOverdueState()).isEqualTo(overdueState);
@@ -70,39 +80,66 @@ public class ControllerTest {
 
     @Test
     public void getIssueInfo() {
-        for(int i=1; i<=2; i++) {
-            String guestId = "1";
-            int bookId=i;
-            String startDate="2017/07/07";
-            String dueDate="2017/07/23";
-            Boolean overdueState=false;
-            int calculatedFine=0;
+        String guestId="1";
+        Books bookId=new Books(1,"title", "author", "image_path", "description", 0, 1, "location", "ebookFile_path","paper");
+        String startDate="2017-07-07";
+        String dueDate="2017-07-20";
+        Boolean overdueState=false;
+        int calculatedFine=0;
 
-            IssueSaveRequestDto issueSaveRequestDto = IssueSaveRequestDto.builder()
-                    .guestId(guestId)
-                    .bookId(bookId)
-                    .startDate(startDate)
-                    .dueDate(dueDate)
-                    .overdueState(overdueState)
-                    .calculatedFine(calculatedFine)
-                    .build();
+        booksRepository.save(bookId);
 
-            String url="http://localhost:"+port+"/issues";
+        Books bookId2=new Books(2,"title2", "author2", "image_path2", "description2", 0, 1, "location2", "ebookFile_path2","paper");
+        booksRepository.save(bookId2);
 
-            ResponseEntity<String> responseEntity = restTemplate.
-                    postForEntity(url, issueSaveRequestDto, String.class);
 
-            assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        }
+        IssueSaveRequestDto issueSaveRequestDto=IssueSaveRequestDto.builder()
+                .guestId(guestId)
+                .bookId(bookId)
+                .startDate(startDate)
+                .dueDate(dueDate)
+                .overdueState(overdueState)
+                .calculatedFine(calculatedFine)
+                .build();
 
-        List<Issues> list=issuesRepository.findAllByGuestId("1");
-        for(int i=0; i<list.size(); i++){
-            System.out.println(list.get(i).getGuestId());
-            System.out.println(list.get(i).getBookId());
-            System.out.println(list.get(i).getStartDate());
-            System.out.println(list.get(i).getDueDate());
-            System.out.println(list.get(i).getOverdueState());
-            System.out.println(list.get(i).getCalculatedFine());
+        String url="http://localhost:"+port+"/issues";
+
+        ResponseEntity<String> responseEntity=restTemplate.
+                postForEntity(url, issueSaveRequestDto, String.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        startDate="2018-08-07";
+        dueDate="2018-08-20";
+
+        issueSaveRequestDto=IssueSaveRequestDto.builder()
+                .guestId(guestId)
+                .bookId(bookId2)
+                .startDate(startDate)
+                .dueDate(dueDate)
+                .overdueState(overdueState)
+                .calculatedFine(calculatedFine)
+                .build();
+
+
+        responseEntity=restTemplate.
+                postForEntity(url, issueSaveRequestDto, String.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        List<IssuesResponseDto> list=issuesService.findAllByGuestId("1");
+
+        for(int i=0; i<list.size(); i++) {
+            System.out.println("-----------------");
+            System.out.println("GuestID:"+list.get(i).getGuestId());
+            System.out.println("BookID:"+list.get(i).getBookId());
+            System.out.println("Title:"+list.get(i).getTitle());
+            System.out.println("Author:"+list.get(i).getAuthor());
+            System.out.println("BookType:"+list.get(i).getBookType());
+            System.out.println("StartDate:"+list.get(i).getStartDate());
+            System.out.println("DueDate:"+list.get(i).getDueDate());
+            System.out.println("OverdueState:"+list.get(i).isOverdueState());
+            System.out.println("CalculatedFine:"+list.get(i).getCalculatedFine());
         }
     }
 
@@ -119,7 +156,7 @@ public class ControllerTest {
         String ebookFile_path="ebookFile_path";
         String bookType="paper";
 
-        Books books=new Books(bookId, null, title, author, image_path, description, price, quantity, location, ebookFile_path, bookType);
+        Books books=new Books(bookId, title, author, image_path, description, price, quantity, location, ebookFile_path, bookType);
         booksRepository.save(books);
 
         Optional<Books> result=booksRepository.findById(0);

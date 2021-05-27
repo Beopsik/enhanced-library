@@ -22,6 +22,16 @@ public class Controller{
     public List<BooksResponseDto> getBooks(){
         return booksService.findAll();
     }
+
+    @GetMapping("books/titles/{title}")
+    public List<BooksResponseDto> getBooksByTitle(@PathVariable String title){
+        return booksService.findAllByTitle(title);
+    }
+    @GetMapping("books/author/{author}")
+    public List<BooksResponseDto> getBooksByAuthor(@PathVariable String author){
+        return booksService.findAllByAuthor(author);
+    }
+
     @PostMapping("/issues")
     public String save(@RequestBody IssueSaveRequestDto IssueRequest) {
         String saveResult;

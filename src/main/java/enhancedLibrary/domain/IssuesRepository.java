@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IssuesRepository extends JpaRepository<Issues, Integer> {
     List<Issues> findAllByGuestId(String guestId);
+    Issues findByGuestId(String guestId);
 }
