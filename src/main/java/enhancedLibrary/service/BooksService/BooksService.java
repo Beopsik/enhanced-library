@@ -21,6 +21,7 @@ public class BooksService {
                 .map(BooksResponseDto::new)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public List<BooksResponseDto> findAllByTitle(String title){
         return booksRepository.findAllByTitle(title).stream()
