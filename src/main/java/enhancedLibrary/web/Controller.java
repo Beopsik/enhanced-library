@@ -27,7 +27,7 @@ public class Controller{
     public List<BooksResponseDto> getBooksByTitle(@PathVariable String title){
         return booksService.findAllByTitle(title);
     }
-    @GetMapping("books/author/{author}")
+    @GetMapping("books/authors/{author}")
     public List<BooksResponseDto> getBooksByAuthor(@PathVariable String author){
         return booksService.findAllByAuthor(author);
     }
