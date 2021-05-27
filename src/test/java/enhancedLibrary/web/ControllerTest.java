@@ -57,7 +57,7 @@ public class ControllerTest {
         booksRepository.save(bookId);
         IssueSaveRequestDto issueSaveRequestDto=IssueSaveRequestDto.builder()
                 .guestId(guestId)
-                .bookId(bookId)
+                .bookId(1)
                 .startDate(startDate)
                 .dueDate(dueDate)
                 .overdueState(overdueState)
@@ -99,7 +99,7 @@ public class ControllerTest {
 
         IssueSaveRequestDto issueSaveRequestDto=IssueSaveRequestDto.builder()
                 .guestId(guestId)
-                .bookId(bookId)
+                .bookId(1)
                 .startDate(startDate)
                 .dueDate(dueDate)
                 .overdueState(overdueState)
@@ -118,7 +118,7 @@ public class ControllerTest {
 
         issueSaveRequestDto=IssueSaveRequestDto.builder()
                 .guestId(guestId)
-                .bookId(bookId2)
+                .bookId(2)
                 .startDate(startDate)
                 .dueDate(dueDate)
                 .overdueState(overdueState)

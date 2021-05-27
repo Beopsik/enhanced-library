@@ -16,6 +16,7 @@ public class Archiver {
         IssueSaveRequestDto issueData=new IssueSaveRequestDto();
         issueData.setGuestId(issueRequest.getGuestId());
         issueData.setBookId(issueRequest.getBookId());
+
         issueData.setStartDate(startDate);
         issueData.setDueDate(dueDate);
         issueData.setOverdueState(false);

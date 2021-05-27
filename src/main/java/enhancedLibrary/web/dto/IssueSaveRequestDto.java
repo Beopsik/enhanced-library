@@ -7,19 +7,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Optional;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class IssueSaveRequestDto{
     private String guestId;
-    private Books bookId;
+    private int bookId;
     private String startDate;
     private String dueDate;
     private boolean overdueState;
     private int calculatedFine;
 
     @Builder
-    public  IssueSaveRequestDto(String guestId, Books bookId, String startDate, String dueDate,
+    public  IssueSaveRequestDto(String guestId, int bookId, String startDate, String dueDate,
                                 boolean overdueState, int calculatedFine){
         this.guestId=guestId;
         this.bookId=bookId;
@@ -29,10 +31,10 @@ public class IssueSaveRequestDto{
         this.calculatedFine=calculatedFine;
     }
 
-    public Issues toEntity(){
+    public Issues toEntity(Books books){
         return Issues.builder()
                 .guestId(guestId)
-                .bookId(bookId)
+                .bookId(books)
                 .startDate(startDate)
                 .dueDate(dueDate)
                 .overdueState(overdueState)
