@@ -8,6 +8,7 @@ import enhancedLibrary.web.dto.IssuesResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,22 @@ public class Controller{
 
     @GetMapping("books/titles/{title}")
     public List<BooksResponseDto> getBooksByTitle(@PathVariable String title){
+        try{
+            String url=URLDecoder.decode(title, "UTF-8");
+            title=url;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return booksService.findAllByTitle(title);
     }
     @GetMapping("books/authors/{author}")
     public List<BooksResponseDto> getBooksByAuthor(@PathVariable String author){
+        try{
+            String url=URLDecoder.decode(author, "UTF-8");
+            author=url;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return booksService.findAllByAuthor(author);
     }
 
