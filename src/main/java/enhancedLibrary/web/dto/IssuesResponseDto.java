@@ -5,21 +5,19 @@ import lombok.Getter;
 
 @Getter
 public class IssuesResponseDto {
-    private Long guestId;
-    private String title;
-    private String author;
-    private String location;
-    private int issuePeriod;
-    private boolean overdueStatus;
+    private String guestId;
+    private int bookId;
+    private String startDate;
+    private String dueDate;
+    private boolean overdueState;
     private int calculatedFine;
 
     public IssuesResponseDto(Issues entity){
         this.guestId=entity.getGuestId();
-        this.title=entity.getTitle();
-        this.author= entity.getAuthor();
-        this.location=entity.getLocation();
-        this.issuePeriod=entity.getIssuePeriod();
-        this.overdueStatus=entity.getOverdueStatus();
+        this.bookId=entity.getBookId();
+        this.startDate=entity.getStartDate();
+        this.dueDate=entity.getDueDate();
+        this.overdueState=entity.getOverdueState();
         this.calculatedFine=entity.getCalculatedFine();
     }
 }

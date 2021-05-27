@@ -10,38 +10,46 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class Books {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(length = 100, nullable = false)
+    @Id
+    private Integer bookId;
+
+    @Column
+    private Integer issueIndex;
+
+    @Column(length = 45, nullable = false)
     private String title;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 45, nullable = false)
     private String author;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 45, nullable = false)
     private String image_path;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 45, nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column
     private Integer price;
 
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 45, nullable = false)
     private String location;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 45, nullable = false)
     private String ebookFile_path;
 
+    @Column(length = 7, nullable = false)
+    private String bookType;
+
     @Builder
-    public Books(String title, String author, String image_path,
+    public Books(Integer bookId, Integer issueIndex, String title, String author, String image_path,
                  String description, Integer price, Integer quantity,
-                 String location, String ebookFile_path){
+                 String location, String ebookFile_path, String bookType){
+        this.bookId=bookId;
+        this.issueIndex=issueIndex;
         this.title=title;
         this.author=author;
         this.image_path=image_path;
@@ -50,5 +58,6 @@ public class Books {
         this.quantity=quantity;
         this.location=location;
         this.ebookFile_path=ebookFile_path;
+        this.bookType=bookType;
     }
 }

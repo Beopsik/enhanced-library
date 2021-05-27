@@ -34,8 +34,8 @@ public class BooksService {
                 .collect(Collectors.toList());
     }
 
-    public BooksResponseDto findById(Long id){
-        Books entity=booksRepository.findById(id).orElseThrow(()->
+    public BooksResponseDto findByBookId(int bookId){
+        Books entity=booksRepository.findById(bookId).orElseThrow(()->
                 new IllegalArgumentException("No Book"));
         return new BooksResponseDto(entity);
     }

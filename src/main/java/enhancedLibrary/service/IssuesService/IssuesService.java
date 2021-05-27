@@ -16,12 +16,12 @@ public class IssuesService {
     private final IssuesRepository issuesRepository;
 
     @Transactional
-    public Long save(IssueSaveRequestDto issueData) {
+    public String save(IssueSaveRequestDto issueData) {
         return issuesRepository.save(issueData.toEntity()).getGuestId();
     }
 
     @Transactional
-    public List<IssuesResponseDto> findAllByGuestId(Long guestId) {
+    public List<IssuesResponseDto> findAllByGuestId(String guestId) {
         return issuesRepository.findAllByGuestId(guestId).stream()
                 .map(IssuesResponseDto::new)
                 .collect(Collectors.toList());

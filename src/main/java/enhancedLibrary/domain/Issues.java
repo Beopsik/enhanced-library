@@ -11,39 +11,37 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 public class Issues {
+
     @Id
-    private Long guestId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer issueIndex;
 
-    @Column(length = 100, nullable = false)
-    private String title;
-
-    @Column(length = 50, nullable = false)
-    private String author;
-
-    @Column(length = 100, nullable = false)
-    private String location;
+    @Column(length = 45, nullable = false)
+    private String guestId;
 
     @Column(nullable = false)
-    private Integer issuePeriod;
+    private Integer bookId;
 
     @Column(nullable = false)
-    private Boolean overdueStatus;
+    private String startDate;
+
+    @Column(nullable = false)
+    private String dueDate;
+
+    @Column(nullable = false)
+    private Boolean overdueState;
 
     @Column(nullable = false)
     private Integer calculatedFine;
 
     @Builder
-    public  Issues(Long guestId, String title, String author,
-                                String location, int issuePeriod,
-                                boolean overdueStatus, int calculatedFine){
+    public  Issues(String guestId, int bookId, String startDate, String dueDate,
+                                boolean overdueState, int calculatedFine){
         this.guestId=guestId;
-        this.title=title;
-        this.author=author;
-        this.location=location;
-        this.issuePeriod=issuePeriod;
-        this.overdueStatus=overdueStatus;
+        this.bookId=bookId;
+        this.startDate=startDate;
+        this.dueDate=dueDate;
+        this.overdueState=overdueState;
         this.calculatedFine=calculatedFine;
     }
-
-
 }

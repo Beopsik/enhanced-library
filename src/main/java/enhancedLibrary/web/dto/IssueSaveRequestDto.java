@@ -10,35 +10,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class IssueSaveRequestDto{
-    private Long guestId;
-    private String title;
-    private String author;
-    private String location;
-    private int issuePeriod;
-    private boolean overdueStatus;
+    private String guestId;
+    private int bookId;
+    private String startDate;
+    private String dueDate;
+    private boolean overdueState;
     private int calculatedFine;
 
     @Builder
-    public  IssueSaveRequestDto(Long guestId, String title, String author,
-                                String location, int issuePeriod,
-                                boolean overdueStatus, int calculatedFine){
+    public  IssueSaveRequestDto(String guestId, int bookId, String startDate, String dueDate,
+                                boolean overdueState, int calculatedFine){
         this.guestId=guestId;
-        this.title=title;
-        this.author=author;
-        this.location=location;
-        this.issuePeriod=issuePeriod;
-        this.overdueStatus=overdueStatus;
+        this.bookId=bookId;
+        this.startDate=startDate;
+        this.dueDate=dueDate;
+        this.overdueState=overdueState;
         this.calculatedFine=calculatedFine;
     }
 
     public Issues toEntity(){
         return Issues.builder()
                 .guestId(guestId)
-                .title(title)
-                .author(author)
-                .location(location)
-                .issuePeriod(issuePeriod)
-                .overdueStatus(overdueStatus)
+                .bookId(bookId)
+                .startDate(startDate)
+                .dueDate(dueDate)
+                .overdueState(overdueState)
                 .calculatedFine(calculatedFine)
                 .build();
     }

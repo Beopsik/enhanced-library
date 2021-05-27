@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class BooksResponseDto {
-    private Long id;
+    private int bookid;
     private String title;
     private String author;
     private String image_path;
@@ -16,7 +16,7 @@ public class BooksResponseDto {
     private String ebookFile_path;
 
     public BooksResponseDto(Books entity){
-        this.id=entity.getId();
+        this.bookid=entity.getBookId();
         this.title=entity.getTitle();
         this.author=entity.getAuthor();
         this.image_path=entity.getImage_path();

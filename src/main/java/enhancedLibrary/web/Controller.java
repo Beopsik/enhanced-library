@@ -19,22 +19,22 @@ public class Controller{
     private final Archiver archiver;
 
     @PostMapping("/issues")
-    public Long save(@RequestBody IssueSaveRequestDto IssueRequest) {
-        Long saveResult;
+    public String save(@RequestBody IssueSaveRequestDto IssueRequest) {
+        String saveResult;
         IssueSaveRequestDto issueData = archiver.generateIssue(IssueRequest);
         saveResult = issuesService.save(issueData);
         return saveResult;
     }
 
     @GetMapping("/issues/{id}")
-    public List<IssuesResponseDto> getIssueInfo(@PathVariable Long id) {
-        List<IssuesResponseDto> issueInfo = new ArrayList<>(issuesService.findAllByGuestId(id));
+    public List<IssuesResponseDto> getIssueInfo(@PathVariable String guestId) {
+        List<IssuesResponseDto> issueInfo = new ArrayList<>(issuesService.findAllByGuestId(guestId));
         return issueInfo;
     }
 
     @GetMapping("/books/{id}")
-    public BooksResponseDto getBookContent(@PathVariable Long id, String queryRequest) {
-        BooksResponseDto EbookContent = booksService.findById(id);
+    public BooksResponseDto getBookContent(@PathVariable int bookId, String queryRequest) {
+        BooksResponseDto EbookContent = booksService.findByBookId(bookId);
         return EbookContent;
     }
 }
