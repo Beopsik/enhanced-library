@@ -26,13 +26,13 @@ public class Controller{
         return saveResult;
     }
 
-    @GetMapping("/issues/{id}")
+    @GetMapping("/issues/{guestId}")
     public List<IssuesResponseDto> getIssueInfo(@PathVariable String guestId) {
         List<IssuesResponseDto> issueInfo = new ArrayList<>(issuesService.findAllByGuestId(guestId));
         return issueInfo;
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("/books/{bookId}")
     public BooksResponseDto getBookContent(@PathVariable int bookId, String queryRequest) {
         BooksResponseDto EbookContent = booksService.findByBookId(bookId);
         return EbookContent;
