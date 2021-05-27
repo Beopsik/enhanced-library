@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,8 +47,10 @@ public class ControllerTest {
     public void save(){
         String guestId="1";
         Books bookId=new Books(1,"title", "author", "image_path", "description", 0, 1, "location", "ebookFile_path","paper");
-        String startDate="2017-07-07";
-        String dueDate="2017-07-23";
+        Date today=new Date();
+        String startDate = new SimpleDateFormat("yyyy-MM-dd").format(today);
+        Date due = new Date(today.getTime() + 14*(1000 * 60 * 60 * 24));
+        String dueDate=new SimpleDateFormat("yyyy-MM-dd").format(due);
         Boolean overdueState=false;
         int calculatedFine=0;
 
