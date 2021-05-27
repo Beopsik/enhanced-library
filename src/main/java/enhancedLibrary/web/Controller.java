@@ -18,6 +18,10 @@ public class Controller{
     private final IssuesService issuesService;
     private final Archiver archiver;
 
+    @GetMapping("/")
+    public List<BooksResponseDto> getBooks(){
+        return booksService.findAll();
+    }
     @PostMapping("/issues")
     public String save(@RequestBody IssueSaveRequestDto IssueRequest) {
         String saveResult;
