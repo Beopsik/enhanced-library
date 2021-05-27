@@ -16,6 +16,7 @@ public class IssuesResponseDto {
     private String bookType;
     private String startDate;
     private String dueDate;
+    private String imagePath;
     private boolean overdueState;
     private int calculatedFine;
     /*Date today=new Date();
@@ -31,6 +32,7 @@ public class IssuesResponseDto {
         this.bookType=entity.getBookId().getBookType();
         this.startDate=entity.getStartDate();
         this.dueDate=entity.getDueDate();
+        this.imagePath=entity.getBookId().getImage_path();
         try {
             Date due=new SimpleDateFormat("yyyy-MM-dd").parse(dueDate);
             this.overdueState = today.after(due);
