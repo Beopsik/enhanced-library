@@ -18,7 +18,7 @@ public class Controller{
     private final IssuesService issuesService;
     private final Archiver archiver;
 
-    @GetMapping("/")
+    @GetMapping("/books")
     public List<BooksResponseDto> getBooks(){
         return booksService.findAll();
     }
