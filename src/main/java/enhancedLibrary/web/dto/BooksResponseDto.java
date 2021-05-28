@@ -13,6 +13,7 @@ public class BooksResponseDto {
     private int price;
     private int quantity;
     private String location;
+    private String bookType;
     private String ebookFile_path;
 
     public BooksResponseDto(Books entity){
@@ -24,6 +25,7 @@ public class BooksResponseDto {
         this.price=entity.getPrice();
         this.quantity=entity.getQuantity();
         this.location=entity.getLocation();
+        this.bookType=entity.getBookType();
         this.ebookFile_path=entity.getEbookFile_path();
     }
 
@@ -37,6 +39,7 @@ public class BooksResponseDto {
                 .price(price)
                 .quantity(quantity)
                 .location(location)
+                .bookType(bookType)
                 .ebookFile_path(ebookFile_path)
                 .build();
     }
