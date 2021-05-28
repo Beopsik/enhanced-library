@@ -20,7 +20,7 @@ public class Books {
     @Column(length = 45, nullable = false)
     private String author;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String image_path;
 
     @Column(length = 45, nullable = false)
@@ -35,7 +35,7 @@ public class Books {
     @Column(length = 45, nullable = false)
     private String location;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String ebookFile_path;
 
     @Column(length = 7, nullable = false)
