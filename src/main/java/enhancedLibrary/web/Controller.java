@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/*")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Controller{
     private final BooksService booksService;
@@ -26,7 +26,7 @@ public class Controller{
         return booksService.findAll();
     }
 
-    @GetMapping("books/titles/{title}")
+    @GetMapping("/books/titles/{title}")
     public List<BooksResponseDto> getBooksByTitle(@PathVariable String title){
         try{
             String url=URLDecoder.decode(title, "UTF-8");
@@ -36,7 +36,7 @@ public class Controller{
         }
         return booksService.findAllByTitle(title);
     }
-    @GetMapping("books/authors/{author}")
+    @GetMapping("/books/authors/{author}")
     public List<BooksResponseDto> getBooksByAuthor(@PathVariable String author){
         try{
             String url=URLDecoder.decode(author, "UTF-8");
