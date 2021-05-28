@@ -105,6 +105,7 @@ public class ControllerTest {
                 postForEntity(url, issueSaveRequestDto, String.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        List<Issues> all=issuesRepository.findAll();
         assertThat(all.get(0).getGuestId()).isEqualTo(guestId);
         assertThat(all.get(0).getBookId().getBookId()).isEqualTo(bookId.getBookId());
         assertThat(all.get(0).getBookId().getTitle()).isEqualTo(bookId.getTitle());
